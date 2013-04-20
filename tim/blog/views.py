@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.template.response import TemplateResponse
 from django.core import serializers
+from django.http import Http404
+import urllib
 import models
 
 def index(request):
@@ -32,5 +34,9 @@ def display_post(request,id):
 #    return HttpResponse(html)
 
 def display_tag(request,name):
-    tag = models.Tag.objects.filter(name=name)[0]
-    return render(request, 'display_tag', {'tag': tag} )
+    try:
+        decoded_tag_name = urllib.unquote(name)
+        tag = models.Tag.objects.filter(name=decoded_tag_name)[0]
+        return render(request, 'display_tag', {'tag': tag} )
+    except IndexError:
+        raise Http404('Tag "%s" not found' % decoded_tag_name)
