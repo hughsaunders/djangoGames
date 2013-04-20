@@ -13,6 +13,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
      url(r'^$',views.index),
+     url(r'^api/posts',views.index_json),
      url(r'^posts/(\d+)/?',views.display_post),
      url(r'^tags/([A-Za-z0-9_-]+)/?',views.display_tag),
 )

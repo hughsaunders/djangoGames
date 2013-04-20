@@ -3,11 +3,16 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template.response import TemplateResponse
+from django.core import serializers
 import models
 
 def index(request):
    entries = models.Entry.objects.all() 
    return render(request, 'index',{'entries': entries} )
+
+def index_json(request):
+   entries = models.Entry.objects.all() 
+   return HttpResponse(serializers.serialize('json', entries))
 
 #   html = '<html><body><h1> Posts </h1><ul>'
 #   for entry in entries:
