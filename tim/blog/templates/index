@@ -3,16 +3,14 @@
     <ul>
     {% for entry in entries%}
         <li>
-            <div>
+            <span>
                 <a class="btn btn-small" href="/blog/posts/{{entry.id}}">{{entry.title}}</a>
-                <ul>
-                    <div>
+                <ul style="display:inline-block">
                         {% for tag in entry.tags.all %}
-                        <a href="/blog/tags/{{tag.name|urlencode}}">{{tag.name}}</a>
+                        <a class="label label-info" href="/blog/tags/{{tag.name|urlencode}}">{{tag.name}}</a>
                         {% endfor %} 
-                    </div>
                  </ul>
-            </div>
+            </span>
         </li>
     {% endfor %}
     </ul>
